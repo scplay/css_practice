@@ -1,0 +1,62 @@
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    width: 20rem;
+    background-color: aqua;
+}
+
+.wrapper:after {
+    display : table;
+    content: '';
+    clear: both;
+}
+
+ul.nav {
+    font-size : 1rem;
+    display: inline-block;
+    float: left;
+    width: 8rem;
+    overflow: hidden;
+    background-color: lavender;
+}
+
+input[type="radio"],input[type="checkbox"]  {
+    display: none;
+}
+
+ul.nav input:checked + label{
+    color : fuchsia;
+}
+
+li > ul {
+    max-height: 0rem;
+    display: block;
+    overflow: hidden;
+}
+
+.fold {
+    transition: all 600ms;
+}
+
+ul.nav input:checked ~ ul{
+    max-height: 10rem;
+    display: block;
+}
+
+div.arti {
+    /* float: right; */
+    font-size : 1rem;
+    display: inline-block;
+    overflow:hidden;
+    width: 12rem;
+    background-color: orange;
+    
+    min-height : 100%;
+}
+
+
+
