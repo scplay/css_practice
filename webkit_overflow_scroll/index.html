@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Webkit Overflow Scroll in wechat</title>
+</head>
+<style>
+	* {
+		margin: 0;
+        padding: 0;
+	}
+	body, html {
+		height: 100%;
+		width: 100%;
+		background-color: navy;
+		overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+	}
+
+	.whole-wrapper {
+		background-color: lime;
+		width: 90%;
+		/*min-height: 100%;*/
+	}
+
+	section {
+		background-color: #fff;
+	}
+
+	footer {
+		background-color: orange;
+	}
+</style>
+<body>
+	<div class="whole-wrapper">
+		<h1>i am title</h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi quibusdam esse, dolor? Iste numquam perferendis molestias nostrum aliquam debitis vitae enim laborum itaque ipsum dolores tempora, eos sint nobis qui!</p>
+		<ul>
+			<li>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae iure ipsa ad, facere repellat impedit sapiente nobis, repudiandae asperiores similique cum sint, aspernatur corporis maiores adipisci molestiae, dolore veritatis quisquam.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae iure ipsa ad, facere repellat impedit sapiente nobis, repudiandae asperiores similique cum sint, aspernatur corporis maiores adipisci molestiae, dolore veritatis quisquam.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae iure ipsa ad, facere repellat impedit sapiente nobis, repudiandae asperiores similique cum sint, aspernatur corporis maiores adipisci molestiae, dolore veritatis quisquam.</p>
+			</li>
+		</ul>
+		<section>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut a itaque, illo obcaecati sequi recusandae, porro, qui molestias quaerat voluptatem ratione, sunt ipsam. Dolore, error maiores iste quibusdam, accusantium iure?</p>
+			<br>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut a itaque, illo obcaecati sequi recusandae, porro, qui molestias quaerat voluptatem ratione, sunt ipsam. Dolore, error maiores iste quibusdam, accusantium iure?</p>
+		</section>
+		<section>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut a itaque, illo obcaecati sequi recusandae, porro, qui molestias quaerat voluptatem ratione, sunt ipsam. Dolore, error maiores iste quibusdam, accusantium iure?</p>
+			<br>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut a itaque, illo obcaecati sequi recusandae, porro, qui molestias quaerat voluptatem ratione, sunt ipsam. Dolore, error maiores iste quibusdam, accusantium iure?</p>
+		</section>
+		<footer>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis veniam necessitatibus, eligendi sed eaque quis dolores nemo ab, dignissimos reprehenderit autem! Autem, neque suscipit. Odit quam architecto nulla, assumenda quia!</footer>
+	</div>
+</body>
+</html>
