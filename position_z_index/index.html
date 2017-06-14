@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		
+	.red, .green, .blue { position: relative; }
+	.red { background: red; } 
+	.green { background: green; }
+	.blue { background: blue; }
+
+	/* div:first-child { transform:translate(0,0) } */
+
+	div {
+	  padding : 5px;
+	  background-color: silver;
+	}
+
+	div:nth-child(2) {
+	  margin-top: -1rem;
+	  
+	  background-color: peru;
+	  
+	  /* opacity 不为 1 为 第二个div 新建了一个层？ 新建的层比没层的 div 1 与 div 3 高，但 div 3中的 blue 是 relative 也是一个新建层，但是这个层与 div 2 所在的层同级？ 所以 div 3中的 blue 比整个 div 2都 靠前？ */
+	  /*opacity:.99; */
+	}
+
+	div:nth-child(3) {
+	  margin-top: -1rem;
+	  background-color: tomato;
+	}
+	</style>
+</head>
+<body>
+	<div>1 
+		<span class="red">Red 4</span> 
+	</div> 
+	<div>2 
+		<span class="green">Green 5</span> 
+	</div> 
+	<div>3 
+		<span class="blue">Blue 6</span> 
+	</div>
+
+	<pre>
+	  当一个元素被设置了opacity不为1，transforms, filters, css-regions, paged media，也会产生新的层 ?
+	</pre>
+</body>
+</html>
