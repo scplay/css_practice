@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1.0">
+	<meta charset="UTF-8">
+	<title>全屏跟随固底</title>
+</head>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	/* 1. body 必须 100% 定高 */
+	height: 100%;
+	
+}
+
+:root {
+	--footer-height: 2rem;
+	--body-height: 100%;
+}
+
+.content-wrapper {
+	/* 方法1 使用计算属性 ，但是兼容性是一定的问题 */
+	/*min-height: calc(var(--body-height, 100%) - var(--footer-height, 2rem));*/
+
+	/* 方法2.1  内容框必须 mh 100% ,来防止最小高度 */
+	min-height: 100%;
+	/** 
+	 * 方法2.2  并且 padding bottom 一定是footer的高度
+	 * 用来防止其中的内容元素与 footer重叠 
+	 */
+	padding-bottom: 2rem;
+	
+	/**  
+	 * 方法3.1 让整个 div 罩住 footer
+	 * 用 方法2 时这个 position 不能写，
+	 * 要写也要 footer 同时写，因为 postion 产生了层叠 footer就跑下面去了
+	 */
+	/*position: relative;*/
+
+	background: silver;
+}
+
+.content-wrapper > p:last-child {
+	/* 一旦父元素有了 padding 值 collapse 就不发生了 */
+	/*margin-bottom: -2rem;*/
+}
+
+footer.out {
+	/* 方法2.3  
+	 * 最后 footer 的 高度 与 magrin 要正负一致
+	 * 用来偏移回相对位置不超出 body 100% 的高度 
+	 */
+	margin-top: -2rem;
+	height: 2rem;
+
+	background: tomato;
+}
+
+footer.inc {
+	display: none;
+
+	/* 方法3. footer 在 div 里面 */
+	position: absolute;
+	bottom: 0;
+}
+
+</style>
+
+<body>
+	<div class="content-wrapper">
+		<button class="js-btn-plus">&nbsp;&nbsp;+&nbsp;&nbsp;</button>
+		<button class="js-btn-minus">&nbsp;&nbsp;-&nbsp;&nbsp;</button>
+		<p>1. body 必须 100% 定高</p>
+		<p class='js-para'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi a aspernatur unde assumenda quidem esse sint possimus et tenetur. Unde facere blanditiis atque ducimus necessitatibus. Laudantium amet quidem consequuntur libero.</p>
+		<p class='js-para'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi a aspernatur unde assumenda quidem esse sint possimus et tenetur. Unde facere blanditiis atque ducimus necessitatibus. Laudantium amet quidem consequuntur libero.</p>
+		<p class='js-para'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi a aspernatur unde assumenda quidem esse sint possimus et tenetur. Unde facere blanditiis atque ducimus necessitatibus. Laudantium amet quidem consequuntur libero.</p>
+		<p class='js-para'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi a aspernatur unde assumenda quidem esse sint possimus et tenetur. Unde facere blanditiis atque ducimus necessitatibus. Laudantium amet quidem consequuntur libero.</p>
+		<p class='js-para'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi a aspernatur unde assumenda quidem esse sint possimus et tenetur. Unde facere blanditiis atque ducimus necessitatibus. Laudantium amet quidem consequuntur libero.</p>
+		<p class='js-para'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi a aspernatur unde assumenda quidem esse sint possimus et tenetur. Unde facere blanditiis atque ducimus necessitatibus. Laudantium amet quidem consequuntur libero.</p>
+
+		<footer class='inc'>
+			<p>I'am footer</p>
+		</footer>
+	</div>
+
+	<footer class='out'>
+		<p>I'am footer</p>
+	</footer>
+
+	<script>
+		!function(){
+
+			document.getElementsByClassName('js-btn-plus')[0].onclick = innsertNewPara;
+
+			document.getElementsByClassName('js-btn-minus')[0].onclick = removeLastPara;
+
+			function innsertNewPara(evt){
+				// 阻止 ios 双击放大
+				evt.preventDefault();
+
+				evt.target.parentElement.appendChild(createNewPara());
+			} 
+
+			function removeLastPara(evt){
+				// 阻止 ios 双击放大
+				evt.preventDefault();
+
+				/** @var HTMLElement */
+				var last_para = getLastPara();
+				if (last_para) {
+					evt.target.parentElement.removeChild(last_para);
+				} else {
+					console.log('no para left');
+				}
+			} 
+
+			function getLastPara(){
+				p_list = document.getElementsByClassName('js-para');
+				if (p_list.length) {
+					return p_list[p_list.length-1];
+				}
+			}
+
+			function createNewPara(){
+				var p = document.createElement('p');
+				p.setAttribute('class', 'js-para');
+				p.innerHTML = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi a aspernatur unde assumenda quidem esse sint possimus et tenetur. Unde facere blanditiis atque ducimus necessitatibus. Laudantium amet quidem consequuntur libero.';
+				return p;
+			}
+		}();
+	</script>
+</body>
+
+</html>
