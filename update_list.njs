@@ -11,14 +11,14 @@ dirnames = fs.readdirSync('./')
 
 function newTpl(dir_name) {
 	let tpl = `
-		<ol>
+		<li>
 			<a href="./${dir_name}/">${dir_name}</a>
-		</ol>`;
+		</li>`;
 	return tpl;
 }
 
 
-new_file = file_str.replace(/(<ul>)(?:.*[\r\n\t]*){1,}(<\/ul>)/gi, '$1' + dirnames.join('') + '$2');
+new_file = file_str.replace(/(<ol>)(?:.*[\r\n\t]*){1,}(<\/ol>)/gi, '$1' + dirnames.join('') + '$2');
 
 fs.writeFileSync('./index.html', new_file);
 
