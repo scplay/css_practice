@@ -11,9 +11,9 @@ dirnames = fs.readdirSync('./')
 
 function newTpl(dir_name) {
 	let tpl = `
-		<li>
-			<a href="./${dir_name}/">dir_name</a>
-		</li>`;
+		<ol>
+			<a href="./${dir_name}/">${dir_name}</a>
+		</ol>`;
 	return tpl;
 }
 
