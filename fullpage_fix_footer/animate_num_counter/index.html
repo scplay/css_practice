@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数字 + - 动画</title>
+</head>
+<style>
+	.select-wrapper {
+		margin: 1rem;
+	}
+	.counter-wrapper {
+		display: inline-block;
+		margin: 0 .5rem ;
+		position: relative;
+		vertical-align: middle;
+
+		width: 3rem;
+		height: 1.5rem;
+	}
+	.counter-wrapper span {
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		text-align: center;
+		width: 3rem;
+		height: 1.5rem;
+
+		display: block;
+		position: absolute;
+		transition: all 300ms ease-out;
+	}
+	.counter-wrapper span.plus {
+		opacity: 0;
+		transform: translateY(-1.5rem);
+	}
+	.counter-wrapper span.minus {
+		opacity: 0;
+		transform: translateY(1.5rem);
+	}
+	
+	
+</style>
+<body>
+	<div class="select-wrapper">
+		<button class="minus" onclick="minusOne()">-</button>
+		<div class="counter-wrapper" data-ontransitionend='removeSpan'>
+			<span>1000</span>
+		</div>
+		<button class="plus" onclick="plusOne()">+</button>
+	</div>
+
+	<button class="at-minus" onclick="autoMinusOne()">auto minus</button>
+	<button class="stop" onclick="stop()">stop</button>
+	<button class="at-plus" onclick="autoPlusOne()">auto plus</button>
+
+	<script>
+		var counter_num = 1000;
+		var counter_wrapper = document.getElementsByClassName('counter-wrapper')[0];
+		var interval_timer;	
+
+		counter_wrapper.addEventListener("transitionend", removeSpan, false);
+
+		function plusOne(){
+			counter_wrapper.lastElementChild.classList.add('plus');
+			counter_wrapper.appendChild(newCounter(++counter_num));
+		}
+
+		function autoPlusOne(){
+			if (! interval_timer) {
+				interval_timer = setInterval(plusOne, 200);
+			} else {
+				stop();
+				autoPlusOne();
+			}
+		}
+
+		function autoMinusOne(){
+			if (! interval_timer) {
+				interval_timer = setInterval(minusOne, 200);
+			} else {
+				stop();
+				autoMinusOne();
+			}
+		}
+
+		function stop(){
+			if (interval_timer) {
+				interval_timer = clearInterval(interval_timer);
+			}
+		}
+
+		function minusOne(){
+			counter_wrapper.lastElementChild.classList.add('minus');
+			counter_wrapper.appendChild(newCounter(--counter_num));
+		}
+
+		function newCounter(counter_num){
+			var span = document.createElement('span');
+			span.innerHTML = counter_num;
+			return span;
+		}
+
+		function removeSpan(e) {
+			var span = e.target;
+			this.removeChild(span);
+		}
+	</script>
+</body>
+</html>
