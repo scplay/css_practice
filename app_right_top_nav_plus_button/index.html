@@ -1,0 +1,119 @@
+<html>
+<head>
+
+<style id="webmakerstyle">
+* {
+  padding: 0;
+  margin:0;
+  box-sizing: border-box;
+}
+
+*:before {
+  box-sizing: border-box;
+}
+
+header {
+  height: 2rem;
+  background-color: tomato;
+}
+
+header > nav {
+  float: right;
+  height: 2rem;
+  position:relative;
+  text-align: right;
+}
+
+nav > button {
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-size: 1.5rem;
+  width: 5rem;
+}
+
+nav:hover > button {
+  color: lime;
+}
+
+nav:hover > ul {
+  transform: scale(1);
+}
+
+ul:before {
+  
+  box-sizing: border-box;
+  
+  display: block;
+  content: "";
+  width:.8rem;
+  height:.5rem;
+  position:absolute;
+  
+  top: -.5rem;
+  right: 1.1rem;
+  
+  border-left: .4rem solid transparent;
+  border-right: .4rem solid transparent;
+  border-bottom: .5rem solid #555;
+}
+
+ul {
+  transform: scale(0);
+  transform-origin: 70% -.5rem;
+  transition: all 300ms ease-out;
+
+  padding: 0 .3rem .2rem;
+
+  position: absolute;
+  top: 2.5rem;
+  right: 1rem;
+
+  text-align: center;
+  
+  width: 5.5rem;
+  
+  background-color: #555;
+  color: white;
+  
+  border-radius: .3rem;
+}
+
+ul > li {
+  list-style: none;
+  padding-top: .2rem;
+  cursor: pointer;
+}
+
+ul > li~li {
+  padding: 0 .2rem;
+  border-top: 1px dashed peru;
+}
+</style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <button>+</button>
+      <ul>
+        <li>扫一扫</li>
+        <li>聊天</li>
+        <li>添加朋友</li>
+      </ul>
+    </nav>
+  </header>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis dignissimos exercitationem deleniti tempore facilis architecto numquam debitis nam nobis accusamus, vitae perspiciatis dolore dolorem, sapiente nisi officia dolorum provident et.</p>
+</body>
+</html>
+
+<script src="chrome-extension://lkfkkhfhhdkiemehlpkgjeojomhpccnh/lib/screenlog.js"></script><script src="filesystem:chrome-extension://lkfkkhfhhdkiemehlpkgjeojomhpccnh/temporary/script.js">
+</script>
+</body>
+</html>
