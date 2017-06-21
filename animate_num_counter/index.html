@@ -39,6 +39,14 @@
 		opacity: 0;
 		transform: translateY(1.5rem);
 	}
+	.counter-wrapper span.new-plus {
+		opacity: 0;
+		transform: translateY(1.5rem);
+	}
+	.counter-wrapper span.new-minus {
+		opacity: 0;
+		transform: translateY(-1.5rem);
+	}
 	
 	
 </style>
@@ -62,10 +70,6 @@
 
 		counter_wrapper.addEventListener("transitionend", removeSpan, false);
 
-		function plusOne(){
-			counter_wrapper.lastElementChild.classList.add('plus');
-			counter_wrapper.appendChild(newCounter(++counter_num));
-		}
 
 		function autoPlusOne(){
 			if (! interval_timer) {
@@ -91,9 +95,20 @@
 			}
 		}
 
+		function plusOne(){
+			counter_wrapper.lastElementChild.classList.add('plus');
+			var new_span = newCounter(++counter_num);
+			counter_wrapper.appendChild(new_span);
+			new_span.className = 'new-plus';
+			setTimeout(()=> new_span.classList.remove('new-plus'), 0);
+		}
+
 		function minusOne(){
 			counter_wrapper.lastElementChild.classList.add('minus');
-			counter_wrapper.appendChild(newCounter(--counter_num));
+			var new_span = newCounter(--counter_num);
+			counter_wrapper.appendChild(new_span);
+			new_span.className = 'new-minus';
+			setTimeout(()=> new_span.classList.remove('new-minus'), 0);
 		}
 
 		function newCounter(counter_num){
@@ -104,7 +119,11 @@
 
 		function removeSpan(e) {
 			var span = e.target;
-			this.removeChild(span);
+
+			if (span.classList.contains('plus') || span.classList.contains('minus')) {
+				this.removeChild(span);
+			}
+			
 		}
 	</script>
 </body>
