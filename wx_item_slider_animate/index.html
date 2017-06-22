@@ -1,0 +1,199 @@
+<html>
+<head>
+
+<style id="webmakerstyle">
+* {
+  padding: 0;
+  margin:0;
+  box-sizing: border-box;
+}
+
+*:before {
+  box-sizing: border-box;
+}
+
+body {
+  width:100%;
+  overflow: hidden;
+}
+
+.item-wrapper {
+  height:5rem;
+  width:100%;
+  background-color: lightcoral;
+  word-break: pre-wrap;
+  
+  position:absolute;
+  
+  transition:all 200ms ease-out;
+  
+  user-select: none;
+  cursor: -webkit-grab;
+}
+
+.item-wrapper.grabbing {
+  cursor: -webkit-grabbing;
+}
+
+.item-wrapper > div {
+  display: inline-block;
+  height:100%;
+}
+
+.item {
+  width:100%;
+  background-color: lightcyan;
+  
+  padding: .5rem 1rem;
+}
+
+.sider {
+  width: 5rem;
+  height: 100%;
+  
+  position:absolute;
+  left:100%;
+  top:0;
+  font-size: 0;
+}
+
+.sider > div{
+  display:inline-block;
+  width:50%;
+  height: 100%;
+  font-size: 1rem;
+  line-height: 5rem;
+  text-align:center;
+}
+
+.sider .del {
+  color: white;
+  width: 55%;
+  
+  background-color: rgba(241, 0, 0, 0.71);
+  background-clip: content-box;
+}
+
+.sider .edit {
+  background-color: silver;
+  width: 45%;
+}
+</style>
+</head>
+<body>
+<div id='js_wrapper' class="item-wrapper">
+  
+  <div class="item">
+    <h2>头像？</h2>
+    <p>可能是我的 slogan，are you ready ! </p>
+  </div>
+  
+  <div class="sider">
+    <div class="del" onclick="alert('滚');">删除</div>
+    <div class="edit">取消</div>
+  </div>
+  
+</div>
+
+<script src="chrome-extension://lkfkkhfhhdkiemehlpkgjeojomhpccnh/lib/screenlog.js"></script><script>
+var wrapper = document.getElementById('js_wrapper');
+
+var is_pressed = false;
+
+var start_pos = {
+  x : 0, 
+  y : 0
+}
+
+var pos_shift = {
+  x : 0, 
+  y : 0
+}
+
+var TRANSITION_TIME = 200;
+
+var OPEN_SHIFT = '-5rem';
+
+wrapper.onmousedown = (e) => {
+  
+  if (isSiderOnClick(e.target)) return;
+  
+  is_pressed = true;
+  
+  start_pos = {
+    x : e.clientX,
+    y : e.clientY
+  };
+  
+  wrapper.classList.add('grabbing');
+}
+
+wrapper.onmouseup = wrapper.onmouseout = dragStop;
+  
+function dragStop(e) {
+  if (! is_pressed) return;
+
+  is_pressed = false;
+  
+  wrapper.classList.remove('grabbing');
+
+  if (shouldOpen()) {
+    return wrapperOpen();
+  }
+  
+  if (pos_shift.x < 25) {
+    wrapperClose();
+  } else {
+    wrapperCloseBounce();
+  }
+  
+}
+
+wrapper.onmousemove = (e) => {
+  if (! is_pressed) return;
+  
+  pos_shift = {
+    x : e.clientX - start_pos.x,
+    y : e.clientY - start_pos.y,
+  }
+  
+  if (pos_shift.x > 40) {
+    pos_shift.x = 40;
+  }
+  
+  if (pos_shift.x < -120) {
+    pos_shift.x = -120;
+  }
+  
+  wrapper.style.left = pos_shift.x * .65 +'px';
+}
+
+function shouldOpen() {
+  return parseInt(wrapper.style.left) < -30; 
+}
+
+function shouldClose() {
+  return parseInt(wrapper.style.left) >= -50; 
+}
+
+function wrapperOpen(){
+    wrapper.style.left = OPEN_SHIFT;
+}
+
+function wrapperClose(){
+    wrapper.style.left = '0';
+}
+
+function wrapperCloseBounce(){
+    wrapper.style.left = '-1rem';
+    setTimeout(()=> wrapper.style.left = '0', TRANSITION_TIME);
+}
+
+function isSiderOnClick(targetElem) {
+  return targetElem.classList.contains('del') ||      
+         targetElem.classList.contains('edit') 
+}
+//# sourceURL=userscript.js
+</script>
+</body>
+</html>
