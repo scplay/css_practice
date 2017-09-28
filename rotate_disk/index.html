@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>rotate disk</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html, body {
+			overflow: hidden;
+			/**
+			 * https://developer.mozilla.org/en-US/docs/Web/CSS/background
+			 */
+			background: #5b897f;
+		}
+
+		.animate-stage {
+			height: 300px;
+			width: 300px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.animate-stage:hover .disk {
+			left: 60%;
+			/**
+			 * https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+			 */
+			transition: left 400ms ease-out;
+			/**
+			 * @link https://developer.mozilla.org/en-US/docs/Web/CSS/animation
+			 */
+			animation: cd-rotate 1s infinite linear 550ms;
+		}
+
+		.animate-stage:hover .cover {
+			transition: all 400ms ease-out;
+			box-shadow: -4px 4px 80px 10px #333;
+		}
+
+		.cd-item {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			left: 0;
+			top: 0;
+			background-size: cover;
+		}
+
+		.cover {
+			transition: all 300ms ease-out 600ms;
+			background-image: url(./cover.png);
+			box-shadow: -4px 4px 5px 2px #333;
+		}
+
+		.disk {
+			height: 95%;
+			width: 95%;
+			left: 2.5%;
+			top: 2.5%;
+			transition: all 300ms ease-out 600ms;
+			background-image: url(./cd.png);
+		}
+
+		/**
+		 * @link https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes
+		 */
+		@keyframes cd-rotate {
+			0% {transform: rotate(0deg);}
+			50% {transform: rotate(180deg);}
+			100% {transform: rotate(360deg);}
+		} 
+	</style>
+</head>
+<body>
+	<div class="animate-stage">
+		<div class="disk cd-item"></div>
+		<div class="cover cd-item"></div>
+	</div>
+</body>
+</html>

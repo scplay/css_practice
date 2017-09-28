@@ -1,0 +1,27 @@
+:root {
+    --item-height: 1.5rem;
+}
+
+.select-stage {
+    border: 1px solid #000;
+    width: 5rem;
+    height: calc(7 * var(--item-height));
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.selection {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    user-select: none;
+    /** 为什么子元素会触发父元素的 mouseout event 呢？ */
+    pointer-events: none;
+    /* calc(3 * var(--item-height)); */
+    margin-top: calc(3 * var(--item-height));
+}
+
+.selection__item {
+    height: var(--item-height);
+}
